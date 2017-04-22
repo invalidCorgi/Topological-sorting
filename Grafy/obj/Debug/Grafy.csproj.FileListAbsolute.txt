@@ -1,0 +1,5 @@
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\bin\Debug\Grafy.exe
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\bin\Debug\Grafy.pdb
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Debug\Grafy.csprojResolveAssemblyReference.cache
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Debug\Grafy.exe
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Debug\Grafy.pdb

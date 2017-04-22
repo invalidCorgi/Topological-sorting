@@ -1,0 +1,5 @@
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\bin\Release\Grafy.exe
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\bin\Release\Grafy.pdb
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Release\Grafy.exe
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Release\Grafy.pdb
+C:\Users\Wojtas\Dropbox\programming\Grafy\Grafy\obj\Release\Grafy.csprojResolveAssemblyReference.cache
