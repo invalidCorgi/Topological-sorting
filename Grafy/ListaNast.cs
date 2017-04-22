@@ -19,7 +19,7 @@ namespace Grafy
             }
         }
 
-        public void PrzepiszMacierz(int[,] macierz, int n)
+        public void PrzepiszMacierz(byte[,] macierz, int n)
         {
             for (int i = 0; i < n; i++)
             {
@@ -27,7 +27,7 @@ namespace Grafy
                 {
                     if (macierz[i, j] == 1)
                     {
-                        tablica[i].Wstaw2(j);
+                        tablica[i].Wstaw2(j);   
                     }
                 }
             }
@@ -37,14 +37,14 @@ namespace Grafy
         {
             int ilosc = 0;
 
-            for (int i = 0; i < tablica.Length; i++)
+            for (int i = 0; i < tablica.Length; i++)    //przejdz przez wszystkie wierzcholki
             {
                 var tmp = tablica[i]._korzen;
-                while (tmp.ZwrocNastepny() != null)
+                while (tmp.ZwrocNastepny() != null)     //i przez wszystkie nastepniki (luki do nich)
                 {
                     tmp = tmp.ZwrocNastepny();
                     int n = tmp.ZwrocWartosc();
-                    if (etykiety[0, n] < etykiety[0, i] && etykiety[0, i] < etykiety[1, i] &&
+                    if (etykiety[0, n] < etykiety[0, i] && etykiety[0, i] < etykiety[1, i] &&   //jesli spelnia warunki to zwieksz liczbe powrotnych
                         etykiety[1, i] < etykiety[1, n])
                         ilosc++;
                 }
@@ -58,17 +58,16 @@ namespace Grafy
             bool[] odwiedzone = new bool[tablica.Length];
             for (int i = 0; i < odwiedzone.Length; i++)
             {
-                odwiedzone[i] = false;
+                odwiedzone[i] = false;                      //na poczatek zaden nie jest odwiedzony
             }
             int[,] etykiety = new int[2,tablica.Length];
             Stack<Element> stack = new Stack<Element>();
             bool koniec = false;
             bool pop;
-            int tempElem=0;
-            int kolejnosc = 1;
+            int kolejnosc = 1;                              //zmienna od przypisywania odpowiedniej etykiety
 
             do
-            {
+            {                                               //znajdz pierwszy nieodwiedzony wierzcholek, poloz na stos, oznacz jako odwiedzony
                 int i = 0;
                 do
                 {
@@ -77,66 +76,47 @@ namespace Grafy
                         stack.Push(tablica[i]._korzen);
                         etykiety[0, i] = kolejnosc++;
                         odwiedzone[i] = true;
-                        tempElem = i;
                         break;
                     }
                     i++;
+                    if (i == odwiedzone.Length)         //jesli wszystkie sa juz odwiedzone to zakoncz generowanie etykiet
+                        koniec = true;
                 } while (i < odwiedzone.Length);
                 while(stack.Any())
                 {
-                    pop = true;
-                    var tmp = tablica[tempElem]._korzen;
+                    pop = true;                         //jesli nie bedzie nieodwiedzonych nastepnikow to sciagnij ze stosu
+                    var tmp = stack.Peek();             //odczytaj ostatni element na stosie
                     while (tmp.ZwrocNastepny() != null)
                     {
                         tmp = tmp.ZwrocNastepny();
-                        if (odwiedzone[tmp.ZwrocWartosc()] == false)
+                        if (odwiedzone[tmp.ZwrocWartosc()] == false)    //szukaj nieodwiedzonego nastepnika
                         {
-                            stack.Push(tablica[tmp.ZwrocWartosc()]._korzen);
-                            etykiety[0, tmp.ZwrocWartosc()] = kolejnosc++;
-                            odwiedzone[tmp.ZwrocWartosc()] = true;
-                            tempElem = tmp.ZwrocWartosc();
-                            pop = false;
-                            break;
+                            stack.Push(tablica[tmp.ZwrocWartosc()]._korzen);    //poloz go na stos
+                            etykiety[0, tmp.ZwrocWartosc()] = kolejnosc++;      //przypisz etykiete wejsciowa
+                            odwiedzone[tmp.ZwrocWartosc()] = true;              //oznacz jako odwiedzony
+                            pop = false;                  //jesli byl nieodwiedzony to przechodz dalej bez sciagania ze stosu (cofania sie)
+                            break;                          //wyjdz z szukania nastepnikow
                         }
-                        if (tmp.ZwrocNastepny() == null)
+                        if (tmp.ZwrocNastepny() == null)                        //dodatkowy warunek dla ostatniego nastepnika                    
                         {
                             if (odwiedzone[tmp.ZwrocWartosc()] == false)
                             {
                                 stack.Push(tablica[tmp.ZwrocWartosc()]._korzen);
                                 etykiety[0, tmp.ZwrocWartosc()] = kolejnosc++;
                                 odwiedzone[tmp.ZwrocWartosc()] = true;
-                                tempElem = tmp.ZwrocWartosc();
                                 pop = false;
-                                break;
                             }
                         }
                     }
                     if (pop)
                     {
-                        tmp = stack.Pop();
-                        etykiety[1, tmp.ZwrocWartosc()] = kolejnosc++;
+                        tmp = stack.Pop();                                  //jesli nie bylo nieodwiedzonych nastepnikow to sciagnij ze stosu
+                        etykiety[1, tmp.ZwrocWartosc()] = kolejnosc++;      //i przypisz etykiete wyjsciowa
                         //Console.Write(tmp.ZwrocWartosc()+" ");
-                        if (stack.Any())
-                        {
-                            tmp = stack.Peek();
-                            tempElem = tmp.ZwrocWartosc();
-                        }
                     }
                 }
-                i = 0;
-                do
-                {
-                    if (odwiedzone[i] == false)
-                    {
-                        break;
-                    }
-                    i++;
-                    if (i == odwiedzone.Length)
-                        koniec = true;
-                } while (i<odwiedzone.Length);
             } while (!koniec);
             
-
             return etykiety;
         }
 
@@ -199,8 +179,8 @@ namespace Grafy
 
             public void Wstaw2(int i)
             {
-                _ostatni.UstawNastepny(i);
-                _ostatni = _ostatni.ZwrocNastepny();
+                _ostatni.UstawNastepny(i);              //dodajemy nastepny do aktualnie ostatniego
+                _ostatni = _ostatni.ZwrocNastepny();    //nowo dodany staje sie ostatnim
             }
 
             public void WypiszListe()

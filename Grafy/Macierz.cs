@@ -8,12 +8,12 @@ namespace Grafy
 {
     class Macierz
     {
-        public int[,] macierz;
+        public byte[,] macierz;
         private int _rozmiar;
 
-        public Macierz(int n)
+        public Macierz(int n)   //inicjalizuj macierz zer
         {
-            macierz = new int[n,n];
+            macierz = new byte[n,n];
             _rozmiar = n;
             for (int i = 0; i < n; i++)
             {

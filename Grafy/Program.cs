@@ -12,9 +12,9 @@ namespace Grafy
             StreamWriter writer = new StreamWriter("p1.txt");
             writer.AutoFlush=true;
             var rand = new Random();
-            const int cN = 100;
+            const int cN = 1000;
             const double cGestosc = 0.2;
-            for (int y = 1; y <= 10; y++)
+            for (int y = 1; y <= 15; y++)
             {
                 int n = cN * y;
                 for (int r = 1; r <= 2; r++)
@@ -24,8 +24,9 @@ namespace Grafy
                     writer.WriteLine();
                     writer.WriteLine("etykiety           nastepniki         luki               macierz            liczba lukow");
 
-                    for (int u = 0; u < 5; u++)
+                    for (int u = 0; u < 10; u++)
                     {
+                        //var watch = System.Diagnostics.Stopwatch.StartNew();
                         Macierz macierz = new Macierz(n);
 
                         for (int m = 0; m < (n * n - n) * gestosc; m++)
@@ -35,12 +36,13 @@ namespace Grafy
                             if (!macierz.DodajLuk(i, j))
                                 m--;
                         }
+                        //Console.WriteLine(watch.Elapsed);
 
                         //Console.WriteLine("graf jako macierz:\n");
                         //macierz.WypiszMacierz();
 
                         ListaNast lista = new ListaNast(n);
-                        //var watch = System.Diagnostics.Stopwatch.StartNew();
+                        //watch = System.Diagnostics.Stopwatch.StartNew();
                         lista.PrzepiszMacierz(macierz.macierz, n);
                         //Console.WriteLine(watch.Elapsed);
                         /*for (int m = 0; m < (n * n - n) * gestosc; m++)
@@ -61,6 +63,8 @@ namespace Grafy
 
                         //Console.WriteLine("\ngraf jako lista lukow:\n");
                         //listaLukow.WypiszListe();
+
+                        //Console.WriteLine("\n");
 
                         var watch = System.Diagnostics.Stopwatch.StartNew();
                         var etykiety = lista.GenerowanieEtykiet();
@@ -87,7 +91,7 @@ namespace Grafy
                     writer.WriteLine();
                 }
             }
-            Console.Read();
+            //Console.Read();
         }
     }
 }

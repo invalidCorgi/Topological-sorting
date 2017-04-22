@@ -58,8 +58,7 @@ namespace Grafy
                     }
                     while (tmp.ZwrocNastepny() != null)
                     {
-                        tmp = tmp.ZwrocNastepny();
-                            // przechodzimy na koniec listy, czyli do elementu, który nie posiada elementu następnego.
+                        tmp = tmp.ZwrocNastepny();      // przechodzimy na koniec listy, czyli do elementu, który nie posiada elementu następnego.
                         if (tmp.ZwrocWartosc() == tab)
                         {
                             return false;
@@ -90,13 +89,12 @@ namespace Grafy
                 while (tmp.ZwrocNastepny() != null)
                 {
                     Console.Write(tmp.ZwrocWartosc()[0] + "->" + tmp.ZwrocWartosc()[1] + "\n");
-                    tmp = tmp.ZwrocNastepny();
-                        // przechodzimy na koniec listy, czyli do elementu, który nie posiada elementu następnego.
+                    tmp = tmp.ZwrocNastepny();      // przechodzimy na koniec listy, czyli do elementu, który nie posiada elementu następnego.
                 }
                 Console.Write(tmp.ZwrocWartosc()[0] + "->" + tmp.ZwrocWartosc()[1]);
             }
 
-            public void PrzepiszMacierz(int[,] macierz, int n)
+            public void PrzepiszMacierz(byte[,] macierz, int n)
             {
                 for (int i = 0; i < n; i++)
                 {

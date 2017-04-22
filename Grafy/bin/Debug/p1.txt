@@ -1,0 +1,7 @@
+
+
+n: 1000 gestosc: 0,2
+
+etykiety           nastepniki         luki               macierz            liczba lukow
+00:00:00.0253128   00:00:00.0122923   00:00:00.0147287   00:00:00.0142301   99805
+
